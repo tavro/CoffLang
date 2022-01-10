@@ -1,0 +1,7 @@
+! example syntax
+
+int main: (int argc, [string] argv) 
+{ 
+	> argc;
+	< 0; 
+}
