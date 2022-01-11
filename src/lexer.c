@@ -169,6 +169,7 @@ token_T* lexer_next_token(lexer_T* lexer)
 {
 	while(lexer->content != '\0')
 	{
+		lexer_skip_whitespace(lexer);
 		if (isalpha(lexer->content)) 
 		{
 			return lexer_advance_with(lexer, lexer_parse_id(lexer));

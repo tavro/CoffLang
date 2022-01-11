@@ -19,7 +19,7 @@ void coff_compile(char* src)
 
 	while ((t = lexer_next_token(lexer))->type != TOKEN_EOF)
 	{
-		printf("token(%s) (%d)\n", t->value, t->type);
+		printf("%s\n", token_to_str(t));
 	}
 }
 

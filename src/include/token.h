@@ -28,4 +28,6 @@ typedef struct TOKEN_STRUCT
 
 token_T* init_token(char* value, int type);
 
+char* token_to_str(token_T* token);
+
 #endif
