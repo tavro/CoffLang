@@ -1,5 +1,4 @@
-int main : (int argc, [string] argv) 
+main > int : (argc > int, argv > list[string])
 { 
-	> argc ;
-	< 0 ; 
+	< (0) ;
 }

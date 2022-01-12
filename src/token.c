@@ -38,7 +38,7 @@ const char* token_type_to_str(int type)
         case TOKEN_OBRACE: return "TOKEN_OBRACE";
         case TOKEN_CBRACE: return "TOKEN_CBRACE";
         case TOKEN_RETURN: return "TOKEN_RETURN";
-        case TOKEN_PRINT: return "TOKEN_PRINT";
+        case TOKEN_TYPER: return "TOKEN_TYPER";
     }
 
     return "unstringable_token";

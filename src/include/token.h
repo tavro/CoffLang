@@ -21,7 +21,7 @@ typedef struct TOKEN_STRUCT
 		TOKEN_OBRACE,	// [
 		TOKEN_CBRACE,	// ]
 		TOKEN_RETURN,	// <
-		TOKEN_PRINT,	// >
+		TOKEN_TYPER,	// >
 	} type;
 
 } token_T;

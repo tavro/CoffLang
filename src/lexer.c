@@ -172,12 +172,12 @@ token_T* lexer_next_token(lexer_T* lexer)
 		lexer_skip_whitespace(lexer);
 		if (isalpha(lexer->content)) 
 		{
-			return lexer_advance_with(lexer, lexer_parse_id(lexer));
+			return lexer_parse_id(lexer);
 		}
 
 		if (isdigit(lexer->content))
 		{
-			return lexer_advance_with(lexer, lexer_parse_number(lexer));
+			return lexer_parse_number(lexer);
 		}
 
 		switch (lexer->content)
@@ -196,7 +196,7 @@ token_T* lexer_next_token(lexer_T* lexer)
 			case ',': return lexer_advance_current(lexer, TOKEN_COMMA);
 
 			case '<': return lexer_advance_current(lexer, TOKEN_RETURN);
-			case '>': return lexer_advance_current(lexer, TOKEN_PRINT);
+			case '>': return lexer_advance_current(lexer, TOKEN_TYPER);
 
 			case ';': return lexer_advance_current(lexer, TOKEN_SEMI);
 			case '\0': break;
