@@ -123,11 +123,6 @@ AST_T* parser_parse_list(parser_T* parser)
 
 	parser_eat(parser, TOKEN_CPAREN);
 
-	/*
-	// I dont think there will ever be a typer
-	// after a cparen in my language.
-	// But I'm keeping it just in case.
-
 	if(parser->token->type == TOKEN_TYPER) 
 	{
 		parser_eat(parser, TOKEN_TYPER);
@@ -147,7 +142,6 @@ AST_T* parser_parse_list(parser_T* parser)
 			}
 		}
 	}
-	*/
 
 	//is funtion / ifstatement / loop / etc.
 	if (parser->token->type == TOKEN_OBRACE)

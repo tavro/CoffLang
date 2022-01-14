@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 ssize_t getline(char **lineptr, ssize_t *n, FILE *stream) {
     char *bufptr = NULL;
@@ -97,4 +98,19 @@ char* coff_read_file(const char* filename)
 	}
 
 	return buffer;	
+}
+
+void coff_write_file(const char* filename, char* outbuffer)
+{
+	FILE* fp;
+	fp = fopen(filename, "wb");
+	
+	if(fp == NULL)
+	{
+		printf("Could not open file %s\n", filename);
+		exit(1);
+	}
+
+	fputs(outbuffer, fp);
+	fclose(fp);
 }
