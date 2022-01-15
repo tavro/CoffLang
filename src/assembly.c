@@ -6,7 +6,7 @@
 
 char* assembly_frontend_int(AST_T* ast)
 {
-
+	printf("Entered assembly_frontend_int!\n");
 }
 
 char* assembly_frontend_call(AST_T* ast)
@@ -22,7 +22,7 @@ char* assembly_frontend_call(AST_T* ast)
 		var_s[1] = '0';
 		var_s[2] = '\0';
 
-		if(arg && arg->type == AST_VAR) 
+		if(arg && arg->type == AST_VAR)
 		{
 			char* assembly_var_s = assembly_frontend_variable(arg, 8);
 			var_s = realloc(var_s, (strlen(assembly_var_s) + 1) * sizeof(char));
@@ -30,7 +30,7 @@ char* assembly_frontend_call(AST_T* ast)
 			free(assembly_var_s);
 		}
 
-		const char* template = "movl %s, \%eax\nmovl \%ebp, \%esp\npopl \%ebp\n\nret\n";
+		const char* template = "movl %s, %%eax\nmovl %%ebp, %%esp\npopl %%ebp\n\nret\n";
 		char* ret_str = calloc(strlen(template) + 128, sizeof(char));
 		sprintf(ret_str, template, var_s);
 		s = realloc(s, (strlen(ret_str) + 1) * sizeof(char));
@@ -66,7 +66,7 @@ char* assembly_frontend_variable(AST_T* ast, int id)
 	}
 	else 
 	{
-		const char* template = "%d(\%esp)";
+		const char* template = "%d(%%esp)";
 		s = realloc(s, (strlen(template) + 8) * sizeof(char));
 		sprintf(s, template, id);
 	}
@@ -79,7 +79,7 @@ char* assembly_frontend_assignment(AST_T* ast)
 	char* s = calloc(1, sizeof(char));
 	if(ast->value->type == AST_FUNC) 
 	{
-		const char* template = ".globl %s\n%s:\npushl \%ebp\nmovl \%esp, \%ebp\n";
+		const char* template = ".globl %s\n%s:\npushl %%ebp\nmovl %%esp, %%ebp\n";
 		s = realloc(s, (strlen(template) + (strlen(ast->name)*2) + 1) * sizeof(char));
 		sprintf(s, template, ast->name, ast->name);
 
@@ -101,6 +101,7 @@ char* assembly_frontend_root(AST_T* ast)
 	strcpy(value, section_text);
 
 	char* next_value = assembly_frontend(ast);
+
 	value = (char*) realloc(value, (strlen(value) + strlen(next_value) + 1) * sizeof(char));
 	strcat(value, next_value);
 
@@ -116,12 +117,12 @@ char* assembly_frontend_get(AST_T* ast)
 
 char* assembly_frontend(AST_T* ast) 
 {
-	char* value = calloc(1, sizeof(char));
+	
 	char* next_value = 0;
 
 	switch (ast->type)
 	{
-		case AST_COMP: next_value = assembly_frontend_compound(ast); break;
+		case AST_COMP: next_value = assembly_frontend_compound(ast);break;
 		case AST_ASSIGNMENT: next_value = assembly_frontend_assignment(ast); break;
 		case AST_VAR: next_value = assembly_frontend_variable(ast, 0); break;
 		case AST_CALL: next_value = assembly_frontend_call(ast); break;
@@ -133,7 +134,9 @@ char* assembly_frontend(AST_T* ast)
 		} break;
 	}
 
+	char* value = calloc(1, sizeof(char));
 	value = realloc(value, (strlen(next_value) + 1) * sizeof(char));
+
 	strcat(value, next_value);
 
 	return value;

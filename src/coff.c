@@ -63,8 +63,8 @@ void coff_compile(char* src)
     coff_write_file("ass.s", s);
     printf("%s\n", s);
 
-    bash("as ass.s -o ass.o");
-    bash("ld ass.o -o ass.exe");
+    bash("as --32 ass.s -o ass.o");
+    bash("ld -m i386pe ass.o -o ass.exe");
 
     /*
 	while ((t = lexer_next_token(lexer))->type != TOKEN_EOF)
