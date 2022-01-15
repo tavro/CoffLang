@@ -195,6 +195,8 @@ token_T* lexer_next_token(lexer_T* lexer)
 
 			case ',': return lexer_advance_current(lexer, TOKEN_COMMA);
 
+			case '.': return lexer_advance_current(lexer, TOKEN_INDEXER);
+
 			case '<': return lexer_advance_current(lexer, TOKEN_RETURN);
 			case '>': return lexer_advance_current(lexer, TOKEN_TYPER);
 

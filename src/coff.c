@@ -8,6 +8,14 @@
 #include <string.h>
 #include <stdio.h>
 
+/* Function: bash
+ * ---------------------------
+ *   Function that simulates bash commands
+ *
+ *   cmd: the command you want to simulate
+ * 
+ *   returns : char* representing the output
+ */
 static char* bash(const char* cmd)
 {
     char* output = (char*) calloc(1, sizeof(char));
@@ -45,7 +53,7 @@ static char* bash(const char* cmd)
  */
 void coff_compile(char* src) 
 {
-	lexer_T* lexer = init_lexer(src);
+    lexer_T* lexer = init_lexer(src);
     parser_T* parser = init_parser(lexer);
     AST_T* root = parser_parse_expr(parser);
 	token_T* t = 0;

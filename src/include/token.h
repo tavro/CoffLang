@@ -22,6 +22,7 @@ typedef struct TOKEN_STRUCT
 		TOKEN_CBRACE,	// ]
 		TOKEN_RETURN,	// <
 		TOKEN_TYPER,	// >
+		TOKEN_INDEXER	// .
 	} type;
 
 } token_T;

@@ -4,6 +4,14 @@
 #include <string.h>
 #include <unistd.h>
 
+/* Function: getline 
+ * ---------------------------
+ *   Helper-function to coff_write_file that
+ *   gets a line from file. Since the built in
+ *   function is POSSIX only.
+ * 
+ *   returns : ssize_t
+ */
 ssize_t getline(char **lineptr, ssize_t *n, FILE *stream) {
     char *bufptr = NULL;
     char *p = bufptr;
@@ -100,6 +108,15 @@ char* coff_read_file(const char* filename)
 	return buffer;	
 }
 
+/* Function: coff_write_file
+ * ---------------------------
+ *   Simply writes to a file
+ *
+ *   filename: the file to write to
+ *   outbuffer: the content to write
+ * 
+ *   returns : nothing
+ */
 void coff_write_file(const char* filename, char* outbuffer)
 {
 	FILE* fp;

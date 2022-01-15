@@ -21,6 +21,14 @@ token_T* init_token(char* value, int type)
 	return token;
 }
 
+/* Function: token_type_to_str
+ * ---------------------------
+ *   Takes a token type and returns it as a string
+ *
+ *   type : the token type        (for example: TOKEN_SEMI)
+ * 
+ *   returns : char* (string)
+ */
 const char* token_type_to_str(int type) 
 {
     switch (type) 
@@ -44,6 +52,14 @@ const char* token_type_to_str(int type)
     return "unstringable_token";
 }
 
+/* Function: token_to_str
+ * ---------------------------
+ *   Takes a token and returns it represented as a string
+ *
+ *   token : the token itself
+ * 
+ *   returns : char* (string)
+ */
 char* token_to_str(token_T* token) 
 {
     const char* type_str = token_type_to_str(token->type);

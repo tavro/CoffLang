@@ -88,6 +88,11 @@ AST_T* parser_parse_id(parser_T* parser)
 			ast->type = AST_CALL;
 			ast->value = parser_parse_list(parser);
 		}
+		else if (parser->token->type == TOKEN_INDEXER) 
+		{
+			ast->type = AST_GET;
+			ast->value = parser_parse_list(parser);
+		}
 	}
 
 	return ast;
@@ -111,7 +116,9 @@ AST_T* parser_parse_block(parser_T* parser)
 
 AST_T* parser_parse_list(parser_T* parser)
 {
-	parser_eat(parser, TOKEN_OPAREN);
+	unsigned int is_indexer = parser->token->type == TOKEN_INDEXER;
+
+	parser_eat(parser, is_indexer ? TOKEN_INDEXER : TOKEN_OPAREN);
 	AST_T* ast = init_ast(AST_COMP);
 	list_push(ast->children, parser_parse_expr(parser));
 
@@ -121,7 +128,7 @@ AST_T* parser_parse_list(parser_T* parser)
 		list_push(ast->children, parser_parse_expr(parser));
 	}
 
-	parser_eat(parser, TOKEN_CPAREN);
+	parser_eat(parser, is_indexer ? TOKEN_SEMI : TOKEN_CPAREN);
 
 	if(parser->token->type == TOKEN_TYPER) 
 	{

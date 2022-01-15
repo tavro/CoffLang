@@ -14,6 +14,7 @@ typedef struct AST_STRUCT
 		AST_VAR,
 		AST_INT, 
 		AST_STMT, //statement
+		AST_GET,  //indexing
 		AST_NOOP, //no operation
 	} type;
 
