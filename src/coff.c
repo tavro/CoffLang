@@ -58,7 +58,7 @@ void coff_compile(char* src)
     AST_T* root = parser_parse_expr(parser);
 	token_T* t = 0;
 
-    char* s = assembly_frontend_root(root);
+    char* s = assembly_frontend_root(root, init_list(sizeof(struct AST_STRUCT*)));
 
     coff_write_file("ass.s", s);
     printf("%s\n", s);

@@ -1,4 +1,4 @@
 main : (argc > int, argv > list[string]) > int
 {
-	return(argc);
+	return(argv[0]);
 }
