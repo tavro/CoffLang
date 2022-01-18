@@ -1,5 +1,13 @@
 #include "include/list.h"
 
+/* Function: init_list
+ * ---------------------------
+ *   Simply initialize and returns the list
+ *
+ *   item_size : size of item
+ * 
+ *   returns : list_T*
+ */
 list_T* init_list(size_t item_size)
 {
 	list_T* list = calloc(1, sizeof(struct LIST_STRUCT));
@@ -10,6 +18,15 @@ list_T* init_list(size_t item_size)
 	return list;
 }
 
+/* Function: list_push
+ * ---------------------------
+ *   Pushes item to list
+ *
+ *   list : the list to push to
+ *   item : the item to push to the list
+ * 
+ *   returns : nothing
+ */
 void list_push(list_T* list, void* item) 
 {
 	list->size += 1;

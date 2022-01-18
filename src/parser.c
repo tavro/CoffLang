@@ -5,6 +5,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* Function: init_parser
+ * ---------------------------
+ *   Simply initialized and returns the parser
+ *
+ *   lexer : the coff lexer
+ * 
+ *   returns : parser_T*
+ */
 parser_T* init_parser(lexer_T* lexer) 
 {
 	parser_T* parser = calloc(1, sizeof(struct PARSER_STRUCT));
@@ -14,6 +22,15 @@ parser_T* init_parser(lexer_T* lexer)
 	return parser;
 }
 
+/* Function: parser_eat
+ * ---------------------------
+ *   Eats the current token and returns the next one
+ *
+ *   parser : the coff parser
+ *   type   : token type        (for example: TOKEN_SEMI)
+ * 
+ *   returns : token_T*
+ */
 token_T* parser_eat(parser_T* parser, int type)
 {
 	if (parser->token->type != type)
@@ -37,6 +54,14 @@ AST_T* parser_parse(parser_T* parser)
 	return init_ast(AST_NOOP);
 }
 
+/* Function: parser_parse_id
+ * ---------------------------
+ *   Parses an ID (EXAMPLE: varname)
+ *
+ *   parser : the coff parser
+ * 
+ *   returns : AST_T*
+ */
 AST_T* parser_parse_id(parser_T* parser)
 {
 	char* value = calloc(strlen(parser->token->value) + 1, sizeof(char));
@@ -99,6 +124,15 @@ AST_T* parser_parse_id(parser_T* parser)
 }
 
 
+/* Function: parser_parse_block
+ * ---------------------------
+ *   Parses a block 
+ *	 (EXAMPLE: { anything between these gets parsed })
+ *
+ *   parser : the coff parser
+ * 
+ *   returns : AST_T*
+ */
 AST_T* parser_parse_block(parser_T* parser) 
 {
 	parser_eat(parser, TOKEN_OBRACE);
@@ -114,6 +148,15 @@ AST_T* parser_parse_block(parser_T* parser)
 	return ast;
 }
 
+/* Function: parser_parse_list
+ * ---------------------------
+ *   Parses a list
+ *	 (EXAMPLE: (all, these, ids, get, parsed))
+ *
+ *   parser : the coff parser
+ * 
+ *   returns : AST_T*
+ */
 AST_T* parser_parse_list(parser_T* parser)
 {
 	unsigned int is_indexer = parser->token->type == TOKEN_OSQUAR;
@@ -163,6 +206,14 @@ AST_T* parser_parse_list(parser_T* parser)
 	return ast;
 }
 
+/* Function: parser_parse_int
+ * ---------------------------
+ *   Parses an int
+ *
+ *   parser : the coff parser
+ * 
+ *   returns : AST_T*
+ */
 AST_T* parser_parse_int(parser_T* parser)
 {
 	int int_value = atoi(parser->token->value);
@@ -174,6 +225,14 @@ AST_T* parser_parse_int(parser_T* parser)
 	return ast;
 }
 
+/* Function: parser_parse_expr
+ * ---------------------------
+ *   Parses an expression
+ *
+ *   parser : the coff parser
+ * 
+ *   returns : AST_T*
+ */
 AST_T* parser_parse_expr(parser_T* parser)
 {
 	switch (parser->token->type)
@@ -189,6 +248,14 @@ AST_T* parser_parse_expr(parser_T* parser)
 	}
 }
 
+/* Function: parser_parse_compound
+ * ---------------------------
+ *   Parses a compound
+ *
+ *   parser : the coff parser
+ * 
+ *   returns : AST_T*
+ */
 AST_T* parser_parse_compound(parser_T* parser)
 {
 	unsigned int should_close = 0;
