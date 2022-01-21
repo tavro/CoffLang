@@ -3,6 +3,7 @@
 #include "include/parser.h"
 #include "include/io.h"
 #include "include/assembly.h"
+#include "include/visitor.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -58,7 +59,10 @@ void coff_compile(char* src)
     AST_T* root = parser_parse_expr(parser);
 	token_T* t = 0;
 
-    char* s = assembly_frontend_root(root, init_list(sizeof(struct AST_STRUCT*)));
+    visitor_T* visitor = init_visitor();
+    AST_T* optimized_root = visitor_visit(visitor, root, init_list(sizeof(struct AST_STRUCT*)));
+
+    char* s = assembly_frontend_root(optimized_root, init_list(sizeof(struct AST_STRUCT*)));
 
     coff_write_file("ass.s", s);
     printf("%s\n", s);
