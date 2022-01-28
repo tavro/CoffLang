@@ -30,8 +30,18 @@ static char* mkstr(const char* str)
  */
 AST_T* fptr_print(visitor_T* visitor, AST_T* node, list_T* list)
 {
-	//TODO: Implement assembly print functionality
-	return node;
+    AST_T* ast = init_ast(AST_STR);
+    
+    /*
+    AST_T* arg = list->size > 0 ? (AST_T*) list->items[0] : (AST_T*)0;
+    char* str = (char*) calloc(128, sizeof(char));
+    sprintf(str, "%d", arg->int_value);
+    */
+
+    const char* template = "movl $4, \%eax\nmovl $0, \%ebx\nmovl $0, \%ecx\n"
+    ast->string_value = mkstr(template);
+
+	return ast;
 } 
 
 /* Function: library_register_fptr

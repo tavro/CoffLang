@@ -24,6 +24,7 @@ typedef struct AST_STRUCT
 
 	list_T* children;
 	char* name;
+	char* string_value;
 	struct AST_STRUCT* value;
 	int int_value;
 	int data_type;
